@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .box-ratio {
+    @apply relative before:block before:content-[''];
+  }
+
+  .ratio-img-cover {
+    @apply absolute top-0 left-0 w-full h-full object-cover;
+  }
+
+  .ratio-img-contain {
+    @apply absolute top-0 left-0 w-full h-full object-contain;
+  }
+
+}

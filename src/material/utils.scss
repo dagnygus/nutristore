@@ -1,0 +1,48 @@
+@use './material.scss' as mat;
+
+.color-primary {
+  color: mat.$primary-color;
+}
+
+.color-accent {
+  color: mat.$accent-color;
+}
+
+.color-warn {
+  color: mat.$warn-color;
+}
+
+.bg-primary {
+  background-color: mat.$primary-color;
+}
+
+.bg-accent {
+  background-color: mat.$accent-color;
+}
+
+.bg-warn {
+  background-color: mat.$warn-color;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, lighten(mat.$primary-color, $amount: 10) 40%, mat.$accent-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px black;
+}
+
+.bg-blue-grey-400 {
+  background-color: mat.$blue-grey-400;
+}
+
+.bg-blue-grey-600 {
+  background-color: mat.$blue-grey-600;
+}
+
+.bg-transparent-blue-grey {
+  background-color: rgba(mat.$blue-grey-400, .6);
+}
+
+.border-bottom-accent {
+  border-bottom: 1px solid mat.$accent-color;
+}

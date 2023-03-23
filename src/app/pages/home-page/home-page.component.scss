@@ -1,0 +1,32 @@
+@use '../../../material/material.scss' as mat;
+
+.info-heading {
+  border-top: 4px solid mat.$primary-color;
+  border-bottom: 1px solid mat.$accent-color;
+  padding: 0 6px;
+  > h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 16px 0;
+
+    @media (min-width: 768px) {
+      font-size: 24px;
+    }
+  }
+}
+
+.info-body {
+  border-bottom: 8px solid mat.$blue-grey-600;
+  font-size: 12px;
+  padding: 12px 12px;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+.delivery-info {
+  border-top: 4px solid mat.$primary-color;
+  border-bottom: 8px solid mat.$blue-grey-600;
+  padding: 12px;
+}

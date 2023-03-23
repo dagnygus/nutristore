@@ -1,0 +1,60 @@
+@use 'src/material/material.scss' as mat;
+
+h2 {
+  font-size: 24px;
+  text-align: center;
+  margin: 16px 0;
+
+  @media (min-width: 430px) {
+    font-size: 32px;
+  }
+}
+
+h3 {
+  font-size: 18px;
+  @media (min-width: 430px) {
+    font-size: 24px;
+  }
+}
+
+h4 {
+  font-size: 16px;
+  margin-top: 12px;
+  @media (min-width: 430px) {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 430px) {
+  p {
+    font-size: 16px;
+  }
+}
+
+.indicator {
+  transform: scale(0);
+  background-color: rgba(mat.$accent-color, 0.8);
+  animation: 600ms linear infinite  products-indicator-animation;
+  z-index: 10;
+}
+
+.text-indicator {
+  background-image: linear-gradient(to right, transparent, white, white, transparent);
+  animation: 600ms linear infinite text-indicator-animation;
+}
+
+@keyframes products-indicator-animation {
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes text-indicator-animation {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 100%;
+  }
+}

@@ -1,0 +1,61 @@
+<div class="grid grid-cols-2 grid-rows-[auto_auto] gap-[0_8px] text-white mx-auto w-[90%] max-w-[430px]
+            sm:max-w-[600px] md:max-w-[1200px]">
+
+  <div class="info-heading col-[1/2] row-[1/2] text-center bg-transparent-blue-grey backdrop-blur-sm">
+    <h1>Fast, save delivery</h1>
+  </div>
+  <div class="info-body col-[1/2] row-[2/3] bg-transparent-blue-grey backdrop-blur-sm sm:flex">
+    <img src="assets/images/fast_delivery_icon.png"
+         alt="fast_delivery_icon"
+         class="mx-auto w-[80%] max-w-[130px] sm:ml-0 sm:mr-[12px]">
+    <p>
+      We send the ordered products by courier within 24 hours of placing the order. Each shipment is safely and discreetly packed.
+    </p>
+  </div>
+
+  <div class="info-heading col-[2/3] row-[1/2] text-center bg-transparent-blue-grey backdrop-blur-sm">
+    <h1>Only original products</h1>
+  </div>
+  <div class="info-body col-[2/3] row-[2/3] bg-transparent-blue-grey backdrop-blur-sm sm:flex">
+    <img src="assets/images/certificate_icon.inkscape.png"
+         alt="fast_delivery_icon"
+         class="mx-auto w-[80%] max-w-[130px] sm:ml-0 sm:mr-[12px]">
+    <p>
+      We guarantee that all products from our offer are original because they are delivered to us directly from the manufacturers.
+    </p>
+  </div>
+
+</div>
+
+<div class="mt-[8px] delivery-info text-white mx-auto w-[90%] max-w-[430px] md:max-w-[520px] bg-transparent-blue-grey backdrop-blur-sm min-h-[90px]">
+  <img src="assets/images/ueflag.jpg" alt="ueflag" class="w-[120px] float-left mr-[4px]">
+  <p class="text-[12px] md:text-[16px]">
+    We deliver orders throughout Europe. We send foreign shipments via DPD or UPS. Each shipment is safely and discreetly packed.
+  </p>
+  <div class="clear-both"></div>
+</div>
+
+<h1 class="my-[16px] text-[28px] text-center text-white">Newest</h1>
+<ng-container [ngSwitch]="productsStatus$ | push">
+  <ng-template [ngSwitchCase]="StateStatus.complete">
+    <app-products-list [products$]="newestProducts$"
+                       [productsStatus$]="productsStatus$"
+                       (productSelected)="onProductSelected($event)"
+                       (addProduct)="onAddProduct($event)"/>
+    <h1 class="my-[16px] text-[28px] text-center text-white">Most Popular</h1>
+    <app-products-list [products$]="popularProducts$"
+                       [productsStatus$]="productsStatus$"
+                       (productSelected)="onProductSelected($event)"
+                       (addProduct)="onAddProduct($event)"/>
+    <h1 class="my-[16px] text-[28px] text-center text-white">Recomended</h1>
+    <app-products-list [products$]="recomendedProducts$"
+                       [productsStatus$]="productsStatus$"
+                       (productSelected)="onProductSelected($event)"
+                       (addProduct)="onAddProduct($event)"/>
+  </ng-template>
+
+  <ng-template [ngSwitchCase]="StateStatus.pending">
+    <app-products-list [products$]="fakeProducts$"
+                       [productsStatus$]="productsStatus$"/>
+  </ng-template>
+</ng-container>

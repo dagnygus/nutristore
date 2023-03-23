@@ -1,0 +1,36 @@
+<app-register-update-form *ngIf="isRegister$ | push"
+                          @formsContent
+                          class="block w-[98%] mx-auto backdrop-blur-sm py-[24px] mat-elevation-z3 page"
+                          [singingUp$]="signingUp$"
+                          [prevUrl$]="prevUrl$"
+                          [prevQuery$]="prevQuery$"
+                          [prevFragment$]="prevFragment$"
+                          (registerSubmit)="onRegisterSubmit($event)"/>
+
+<app-login-form *ngIf="isLogin$ | push"
+                @formsContent
+                class="block w-[98%] mx-auto backdrop-blur-sm py-[24px] mat-elevation-z3 page"
+                [signingIn$]="signingIn$"
+                [prevUrl$]="prevUrl$"
+                [prevQuery$]="prevQuery$"
+                [prevFragment$]="prevFragment$"
+                (loginSubmit)="onLoginSubmit($event)"/>
+
+<app-update-form *ngIf="isUpdate$ | push"
+                  @formsContent
+                 class="block w-[98%] mx-auto backdrop-blur-sm py-[24px] mat-elevation-z3 page"
+                 [updating$]="updating$"
+                 [userData]="userData$ | push"
+                 (updateSubmit)="onUpdateSubmit($event)"
+                 [prevUrl$]="prevUrl$"
+                 [prevQuery$]="prevQuery$"
+                 [prevFragment$]="prevFragment$"/>
+
+<app-new-password-form *ngIf="isNewPassword$ | push"
+                        @formsContent
+                       class="block w-[98%] mx-auto backdrop-blur-sm py-[24px] mat-elevation-z3 page"
+                       [passwordChanging$]="changingPassword$"
+                       (passwordSubmit)="onPasswordSubmit($event)"
+                       [prevUrl$]="prevUrl$"
+                       [prevQuery$]="prevQuery$"
+                       [prevFragment$]="prevFragment$"/>

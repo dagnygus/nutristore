@@ -1,0 +1,15 @@
+export const AMINOACIDS = 'aminoacids';
+export const FAT_BURNERS = 'fat-burners';
+export const PREWORKOUT = 'preworkout';
+export const AFTERWORKOUT = 'afterworkout';
+export const CREATINE = 'creatine';
+export const SARMS = 'sarms';
+export const LIVER_PROTECTION = 'liver-protection';
+export const HEALTH_AND_VITAMINS = 'health-and-vitamins';
+export const JOINT_PROTECTION = 'joint-protection';
+export const MEMORY_AND_CONCETRATION = 'memory-and-concetration';
+export const ENERGY_AND_AGITATION = 'energy-and-agitation';
+export const STRESS_AND_NERVES = 'stress-and-nerves';
+export const POTENCY_AND_TESTOSTERONE = 'potency-and-testosterone';
+export const SLEEP_AND_RELAX = 'sleep-and-relax';
+export const LIBIDO_IN_WOMAN = 'libido-in-woman';

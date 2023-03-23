@@ -1,0 +1,184 @@
+<ng-container [ngSwitch]="productStateus$ | push">
+  <ng-template [ngSwitchCase]="StateStatus.complete">
+    <div *rxLet="product$; let product;" class="grid mt-[24px] px-[16px] md:grid-cols-[1fr_2fr] md:grid-rows-[auto_auto_auto_auto]">
+      <div class="bg-blue-grey-600 py-[8px] rounded-[16px] flex flex-col items-center m-[16px]
+                  justify-self-center mat-elevation-z2 w-full max-w-[316px] md:col-[1/2] md:row-[1/3]
+                  md:self-start">
+        <app-rating class="mb-[16px]" [rating]="product.rating"/>
+        <div class="box-ratio before:pb-[100%] w-full max-w-[280px] justify-self-center">
+          <img class="ratio-img-contain" [src]="product.imageUrl" alt="product_picture">
+        </div>
+        <div class="px-[12px] color-accent">
+          <h2>{{ product.name }}</h2>
+        </div>
+      </div>
+
+
+        <div *rxLet="quantity$; let quantity"
+             class="justify-self-center w-full bg-blue-grey-600 p-[16px] rounded-[16px] mat-elevation-z2
+                    flex flex-col items-center  max-w-[470px] md:col-[2/3] md:row-[1/2] md:mt-[18px]">
+          <p class="text-center text-[20px] color-accent">Price: {{ product.price }}</p>
+          <p class="text-center text-[16px] mb-[10px] mt-[4px]">Quantity: {{ quantity }}</p>
+          <div class="grid grid-cols-3 mx-[12px] gap-[10px_6px] w-full">
+            <button class="bg-primary text-[24px] mat-elevation-z2" (click)="incease()">+</button>
+            <div class="text-[16px] bg-gray-500 flex justify-center items-center mat-elevation-z2 color-primary">
+              <span>{{ (product.price | priceToNumber) * quantity }}$</span>
+            </div>
+            <button class="bg-primary text-[24px] mat-elevation-z2" (click)="decrease()">-</button>
+            <button mat-raised-button
+                    class="col-[1/4]"
+                    color="primary"
+                    (click)="onAddToCartBtnClick(product, quantity)">
+              <span class="color-accent">Add to cart</span> <mat-icon color="accent">shopping_basket</mat-icon>
+            </button>
+          </div>
+        </div>
+
+
+      <div class="px-[16px] flex flex-col md:col-[2/3] md:row-[2/4]">
+        <h3 class="text-center my-[16px]">Description</h3>
+        <p>{{ product.description }}</p>
+      </div>
+      <div class="px-[16px] flex flex-col md:col-[1/2] md:row-[3/4]">
+        <h3 class="text-center mt-[16px] mb-[8px]">Ingredients</h3>
+        <ul class="self-center list-disc my-[8px]">
+          <li class="sm:text-[16px]" *rxFor="let ingredient of product.ingredients">{{ ingredient }}</li>
+        </ul>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngSwitchCase]="StateStatus.pending">
+
+    <div class="grid mt-[24px] px-[16px] md:grid-cols-[1fr_2fr] md:grid-rows-[auto_auto_auto_auto]">
+      <div class="bg-blue-grey-600 py-[8px] rounded-[16px] flex flex-col items-center m-[16px] self-start md:row-[1/3]
+                  justify-self-center mat-elevation-z2 relative overflow-hidden w-full max-w-[316px]">
+        <app-rating class="mb-[16px]" [rating]="0"/>
+        <div class="box-ratio before:pb-[100%] w-full">
+        </div>
+        <div class="px-[12px] color-accent">
+          <h2>**********</h2>
+        </div>
+        <div class="indicator absolute top-0 left-0 w-full h-full origin-center rounded-[16px]"></div>
+      </div>
+
+      <div class="justify-self-center w-full bg-blue-grey-600 p-[16px] rounded-[16px] mat-elevation-z2
+                  flex flex-col self-start max-w-[470px] items-center overflow-hidden relative md:mt-[18px]">
+        <p class="text-center text-[20px] color-accent">Price: *</p>
+        <p class="text-center text-[16px] mb-[10px] mt-[4px]">Quantity: *</p>
+        <div class="grid grid-cols-3 mx-[12px] gap-[10px_6px] w-full">
+          <button class="bg-primary text-[24px] mat-elevation-z2">+</button>
+          <div class="text-[16px] bg-gray-500 flex justify-center items-center mat-elevation-z2 color-primary">
+            <span>*$</span>
+          </div>
+          <button class="bg-primary text-[24px] mat-elevation-z2">-</button>
+          <button mat-raised-button
+                  class="col-[1/4]"
+                  color="primary">
+            <span class="color-accent">Add to cart</span> <mat-icon color="accent">shopping_basket</mat-icon>
+          </button>
+        </div>
+        <div class="indicator absolute top-0 left-0 w-full h-full origin-center rounded-[16px]"></div>
+      </div>
+
+      <div class="mt-[24px] md:col-[2/3] md:mx-[16px]">
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+        <div class="h-[16px] my-[8px] bg-gray-400 relative overflow-hidden">
+          <div class="text-indicator absolute top-0 w-full h-full"></div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </ng-template>
+
+</ng-container>
+<div class="p-[16px] mb-[16px] w-full mx-auto max-w-[700px]">
+  <ul>
+    <li>
+      <h4 class="flex items-center color-accent">
+        <mat-icon color="primary" class="mr-[4px]">done</mat-icon> Fast delivery in 24 hours
+      </h4>
+      <p>We deliver parcels in Poland by DPD, UPS and Inpost courier.</p>
+    </li>
+    <li>
+      <h4 class="flex items-center color-accent">
+        <mat-icon  color="primary" class="mr-[4px]">done</mat-icon> Delivery to Parcel Lockers
+      </h4>
+      <p>
+        If you do not want the parcel to be delivered to your home address, we can send it
+        to a selected parcel locker in your area.
+      </p>
+    </li>
+    <li>
+      <h4 class="flex items-center color-accent">
+        <mat-icon color="primary" class="mr-[4px]">done</mat-icon> International shipping
+      </h4>
+      <p>
+        We deliver orders throughout Europe. We send shipments via DPD and UPS courier.
+      </p>
+    </li>
+    <li>
+      <h4 class="flex items-center color-accent">
+        <mat-icon color="primary" class="mr-[4px]">done</mat-icon> Various forms of payment
+      </h4>
+      <p>
+        You can pay for the order to the courier in cash or by card upon delivery,
+        or pay for it in advance by a standard bank transfer.
+      </p>
+    </li>
+    <li>
+      <h4 class="flex items-center color-accent">
+        <mat-icon color="primary" class="mr-[4px]">done</mat-icon> Discreet shipping
+      </h4>
+      <p>
+        We pack parcels in unmarked boxes, so no one will know what's inside your package.
+      </p>
+    </li>
+  </ul>
+</div>

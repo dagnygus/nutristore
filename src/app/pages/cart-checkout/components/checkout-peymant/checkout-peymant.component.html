@@ -1,0 +1,22 @@
+<form class="w-full grid mx-auto max-w-[400px]" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <h2 class="text-center color-accent py-[8px] text-[16px] mb-[16px]">Provide credid card data</h2>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Cart Number</mat-label>
+    <input matInput name="cartNumber" formControlName="cartNumber">
+    <mat-error *appFirstKeyOf="formGroup.controls.cartNumber.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>CVC</mat-label>
+    <input matInput name="cvc" formControlName="cvc">
+    <mat-error *appFirstKeyOf="formGroup.controls.cvc.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent" floatLabel="always">
+    <mat-label>Expiration Date</mat-label>
+    <input matInput placeholder="DD/MM/YYYY" name="expirationDate" formControlName="expirationDate">
+    <mat-error *appFirstKeyOf="formGroup.controls.expirationDate.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <div class="grid grid-cols-2 gap-[4px]">
+    <a mat-raised-button color="warn" routerLink="/cart">Cancel</a>
+    <button mat-raised-button color="accent">Accept</button>
+  </div>
+</form>

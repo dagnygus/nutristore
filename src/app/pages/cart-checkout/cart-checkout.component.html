@@ -1,0 +1,102 @@
+<ng-container *ngIf="!(makingOrder$ | push) else orderPlacedTemplate">
+  <mat-vertical-stepper linear="true"
+                        class="bg-transparent"
+                        animationDuration="500"
+                        *ngIf="userHaveItems$ | push else noItemsTemplate">
+    <mat-step completed>
+      <ng-template matStepLabel>Youe cart items</ng-template>
+      <div class="flex justify-end mb-[24px] text-[12px]">
+        <a mat-raised-button routerLink="/cart" guardedLink color="accent" class="mr-[4px]"><mat-icon>shopping_cart_checkout</mat-icon>Edit cart</a>
+        <button mat-raised-button color="primary" matStepperNext triggerCheckOnClick scrollOnClick="mat-vertical-stepper"><mat-icon>arrow_downward</mat-icon>Next</button>
+      </div>
+      <app-checkout-items-list [list$]="cartList$"></app-checkout-items-list>
+      <div class="my-[16px] w-full mx-auto max-w-[356px] sm:my-[32px]" *rxLet="totalPrice$; let totalPrice">
+        <h2 class="text-[16px] min-[410px]:text-[20px] text-center bg-blue-grey-600 rounded-[6px] py-[4px]">Total Price: {{ totalPrice }}</h2>
+      </div>
+      <div class="flex justify-end mt-[24px] text-[12px]">
+        <button mat-raised-button color="primary" matStepperNext triggerCheckOnClick scrollOnClick="mat-vertical-stepper"><mat-icon>arrow_downward</mat-icon>Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step [stepControl]="checkoutAddress.formGroup">
+      <ng-template matStepLabel>Delivery Address</ng-template>
+      <div class="flex justify-end mb-[24px] text-[12px]">
+        <button mat-button
+                *ngIf="!(changeData$ | push)"
+                color="accent"
+                class="underline"
+                (click)="changeData$.next(true)">Change delivery address</button>
+        <button mat-raised-button color="primary" matStepperPrevious triggerCheckOnClick scrollOnClick="mat-vertical-stepper"><mat-icon>arrow_upward</mat-icon>Previous</button>
+      </div>
+      <app-checkout-address #checkoutAddress
+                            [addressData$]="addressData$"
+                            [changeData$]="changeData$"
+                            (editDone)="changeData$.next(false)">
+      </app-checkout-address>
+      <div class="flex justify-end mt-[24px] text-[12px]">
+        <button mat-raised-button
+                color="primary"
+                matStepperNext
+                triggerCheckOnClick
+                scrollOnClick="mat-vertical-stepper"><mat-icon>arrow_downward</mat-icon>Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step completed>
+      <ng-template matStepLabel>Summary</ng-template>
+      <div class="flex justify-end mb-[24px] text-[12px]">
+        <button mat-raised-button
+                color="primary"
+                matStepperPrevious
+                triggerCheckOnClick
+                scrollOnClick="mat-vertical-stepper"><mat-icon>arrow_upward</mat-icon>Previous</button>
+      </div>
+      <app-checkout-summary [deliveryAddressData$]="checkoutAddress.currentValue$"
+                            [addresseeData$]="authUser$"
+                            [cartList$]="cartList$"
+                            [totalPrice$]="totalPrice$">
+      </app-checkout-summary>
+      <div class="flex justify-end mt-[24px] text-[12px]">
+        <button mat-raised-button
+                color="accent"
+                matStepperNext
+                triggerCheckOnClick
+                scrollOnClick="mat-vertical-stepper"><mat-icon>monetization_on</mat-icon>Accept and go to payments</button>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <div class="flex justify-end mb-[24px] text-[12px]">
+        <button mat-raised-button
+                color="primary"
+                matStepperPrevious
+                triggerCheckOnClick
+                scrollOnClick="mat-vertical-stepper"><mat-icon>arrow_upward</mat-icon>Previous</button>
+      </div>
+      <ng-template matStepLabel>Finalize</ng-template>
+      <app-checkout-peymant (accept)="onAccept()"></app-checkout-peymant>
+    </mat-step>
+  </mat-vertical-stepper>
+</ng-container>
+
+<ng-template #orderPlacedTemplate>
+  <div class="grid grid-rows-[1fr_auto_1fr] h-[80vh]">
+    <div class="justify-self-center self-end mb-[30px]">
+      <mat-icon color="accent" class="scale-[2.5]">sentiment_satisfied</mat-icon>
+    </div>
+    <div>
+      <p class="w-full text-center px-[16px]">Your order has been placed. The shipment will be sent soon. We wish you hard training.</p>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noItemsTemplate>
+  <div class="grid grid-rows-[1fr_auto_1fr] h-[80vh]">
+    <div class="justify-self-center self-end mb-[30px]">
+      <mat-icon color="accent" class="scale-[2.5]">sentiment_dissatisfied</mat-icon>
+    </div>
+    <div>
+      <p class="w-full text-center px-[16px]">You did not selected any product. Select category and add product to Your cart.</p>
+    </div>
+  </div>
+</ng-template>

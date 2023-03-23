@@ -1,0 +1,5 @@
+<app-cart-list-item *rxFor="let item of cartList$; trackBy: 'id'; let index = index;" [cartItem]="item"
+                    (increase)="increase.emit(index)"
+                    (decrease)="decrease.emit(index)"
+                    (remove)="remove.emit(index)"
+                    @cartItem></app-cart-list-item>

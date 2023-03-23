@@ -1,0 +1,21 @@
+<div class="w-full px-[16px] text-center" *rxLet="authUser$; let authUser">
+  <h1>Hi <span class="color-primary underline">{{ (authUser$ | push).firstName }}</span>. <br>Youre Account</h1>
+  <h2 class="color-accent">Common informations</h2>
+  <div class="mx-auto">
+    <p>First Name: {{ authUser.firstName }}</p>
+    <p>Last Name: {{ authUser.lastName }}</p>
+    <p>Address e-mail: {{ authUser.email }}</p>
+  </div>
+  <h2 class="color-accent">Address informations</h2>
+  <div class="mx-auto">
+    <p>City: {{ authUser.city }}</p>
+    <p>Street: {{ authUser.street }}</p>
+    <p>State: {{ authUser.state }}</p>
+    <p>Country: {{ authUser.country }}</p>
+    <p>Zip code: {{ authUser.zipCode }}</p>
+  </div>
+</div>
+<div class="grid grid-cols-2 gap-[6px] text-[12px] mt-[16px] mb-[32px]">
+  <button mat-raised-button color="primary" routerLink="/forms/update">Update account</button>
+  <button mat-raised-button color="accent" routerLink="/forms/password">Change password</button>
+</div>

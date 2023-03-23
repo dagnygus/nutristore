@@ -1,0 +1,13 @@
+<div class="w-full text-center">
+  <mat-icon color="accent" class="scale-150">done</mat-icon>
+</div>
+<div class="w-full text-center my-[16px]">
+  <p>
+    <span class="color-accent">Success!</span> You have added {{ productName$ | push }} to your cart! Congratulations! You have recived
+    Free Shopping by DPD or InPost.
+  </p>
+</div>
+<div class="w-full grid grid-flow-col grid-cols-[1fr_1fr] gap-[4px] text-[12px]">
+  <button mat-raised-button class="grow-[2] text-center" color="primary" (click)="onClose.next()"><mat-icon color="accent">arrow_back</mat-icon><span class="color-accent">Continue shopping</span></button>
+  <a mat-raised-button class="grow-[1] text-center" color="primary" routerLink="/cart" (click)="onClose.next()"><mat-icon color="accent">shopping_cart_checkout</mat-icon><span class="color-accent">Order now</span></a>
+</div>

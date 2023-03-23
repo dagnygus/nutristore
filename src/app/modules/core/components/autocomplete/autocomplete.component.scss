@@ -1,0 +1,19 @@
+@use '../../../../../material/material.scss' as mat;
+
+:host {
+  display: block;
+
+}
+
+nav {
+  max-height: min(60vh, 400px);
+}
+
+li {
+  border-bottom: 1px solid mat.$primary-color;
+}
+
+a:focus {
+  background-color: mat.$accent-color;
+  color: white;
+}

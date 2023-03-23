@@ -1,0 +1,15 @@
+<div *rxFor="let item of list$, trackBy: 'id'"
+     class="grid gap-[8px] bg-blue-grey-400 p-[12px] rounded-[6px] mat-elevation-z3 relative w-full max-w-[356px]">
+  <img [src]="item.imageUrl" alt="product_picture" class="w-[80px] h-[80px] min-[410px]:w-[120px] min-[410px]:h-[120px] justify-self-center object-contain">
+  <div class="w-full bg-blue-grey-600 rounded-[6px] mat-elevation-z2 p-[4px]">
+    <p class="text-[16px] min-[410px]:text-[18px] color-accent text-center">{{ item.name }}</p>
+  </div>
+  <div class="w-full bg-blue-grey-600 rounded-[6px] mat-elevation-z2">
+    <p class="text-[12px] min-[410px]:text-[16px] text-center">Total price {{ item.totalPrice }}</p>
+  </div>
+
+  <div class="absolute bg-primary color-accent top-[10px] right-[10px] w-[30px]
+              h-[30px] rounded-[50%] flex items-center justify-center text-[10px]">
+    <span>x {{ item.quantity }}</span>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="w-[97%] mx-auto grid content-center max-w-[460px]">
+  <p class="text-center text-[12px] text-white mb-[32px]">Comlete the form to login. If you not have accound, <a routerLink="/forms/register" class="color-accent">register</a> now</p>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Address E-Mail</mat-label>
+    <input name="email" formControlName="email" type="text" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.email.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Password</mat-label>
+    <input name="password" formControlName="password" type="password" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.password.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <div class="grid grid-cols-2 gap-[4px] text-[12px]">
+    <button mat-raised-button color="primary" [disabled]="submitDisabled$ | push">Login</button>
+    <a [routerLink]="prevUrl$ | push"  [queryParams]="prevQuery$ | push" [fragment]="prevFragment$ | push" mat-raised-button color="warn">Cancel</a>
+  </div>
+</form>

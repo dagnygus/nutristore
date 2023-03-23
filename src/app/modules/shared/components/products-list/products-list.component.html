@@ -1,0 +1,22 @@
+<ng-container [ngSwitch]="productsStatus$ | push">
+  <ng-template [ngSwitchCase]="StateStatus.complete">
+    <app-products-list-item *rxFor="let product of products$; trackBy: 'id'"
+                            [product]="product"
+                            (click)="$any($event.target).closest('button') ?? productSelected.emit(product.id)"
+                            (addProduct)="addProduct.next($event)"
+                            @item></app-products-list-item>
+  </ng-template>
+
+  <ng-template [ngSwitchCase]="StateStatus.pending">
+    <app-products-list-item-placeholder/>
+    <app-products-list-item-placeholder/>
+    <app-products-list-item-placeholder/>
+    <app-products-list-item-placeholder/>
+    <app-products-list-item-placeholder/>
+    <app-products-list-item-placeholder/>
+    <app-products-list-item-placeholder/>
+    <app-products-list-item-placeholder/>
+    <app-products-list-item-placeholder/>
+    <app-products-list-item-placeholder/>
+  </ng-template>
+</ng-container>

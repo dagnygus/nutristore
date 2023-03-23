@@ -1,0 +1,18 @@
+<div class="box-ratio before:pb-[100%]">
+  <img [src]="product.imageUrl"
+       alt="product_picture"
+       class="ratio-img-contain">
+</div>
+<div class="flex flex-col bg-blue-grey-600 text-center min-h-[120px] inverted-shadow">
+  <app-rating [rating]="product.rating" class="mb-[4px]"></app-rating>
+  <h2 class="text-[12px] text-white mx-[4px]">{{ product.name }}</h2>
+  <button class="w-full p-[10px] text-white mt-auto inverted-shadow" matRipple (click)="addProduct.next(product)">
+    <mat-icon>add</mat-icon>
+    <mat-icon>shopping_basket</mat-icon>
+  </button>
+</div>
+
+<div class="absolute right-[16px] top-[16px] flex items-center justify-center
+            bg-primary w-[30px] h-[30px] rounded-[50%] mat-elevation-z2">
+  <span class="text-white text-[12px]">{{ product.price }}</span>
+</div>

@@ -7,7 +7,12 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush",
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -20,9 +25,7 @@
             "outputPath": "dist/nutristore",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [

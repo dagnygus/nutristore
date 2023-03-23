@@ -1,0 +1,101 @@
+<ng-template cdkConnectedOverlay
+            [cdkConnectedOverlayOrigin]="trigger"
+            [cdkConnectedOverlayOpen]="overlayOpen$ | push"
+            [cdkConnectedOverlayOffsetY]="10"
+            (detach)="backdropClick$.next()"
+            (overlayOutsideClick)="backdropClick$.next()"
+            rx-reposition-scroll-strategy>
+  <div @dropdawn
+       class="bg-primary rounded-[8px] p-[8px_4px] text-[12px]
+            text-white w-[150px] relative origin-top mat-elevation-z3">
+    <div class="absolute left-[30px] top-[-5px] w-[40px] h-[40px] bg-primary rotate-[45deg] -z-10 mat-elevation-z3"></div>
+    <div class="bg-blue-grey-400 rounded-[8px] flex flex-col">
+      <div class="border-bottom-accent p-[6px]">
+        <ng-container *rxLet="authUser$; let user">
+          <p>
+            <ng-container *ngIf="user else elseTemplate">
+              Welcome {{ user.firstName }} {{ user.lastName }} to our store. Check youre account <a routerLink="/account" class="color-accent cursor-pointer">here</a> or <a routerLink="/forms/update" class="color-accent cursor-pointer">update</a> youre information.
+            </ng-container>
+            <ng-template #elseTemplate>
+              Welcome to our store! <a routerLink="/forms/login" class="color-accent cursor-pointer">Log in</a> to youre account or go to <a routerLink="/forms/register" class="color-accent cursor-pointer">registration</a>
+            </ng-template>
+          </p>
+        </ng-container>
+      </div>
+      <div class="border-bottom-accent p-[6px]">
+        <a routerLink="/account" [state]="{ targetLink: '/account' }" mat-button color="primary" class="cursor-pointer"><mat-icon color="accent">lock</mat-icon> Youre account</a>
+      </div>
+      <div class="border-bottom-accent p-[6px]">
+        <a href="#" mat-button color="primary" class="cursor-pointer"><mat-icon color="accent">shopping_basket</mat-icon> Basket</a>
+      </div>
+      <ng-container *rxLet="authUser$; let user">
+        <div class="p-[6px]" [class.border-bottom-accent]="user !== null">
+          <a routerLink="/checkout" guardedLink mat-button color="primary" class="cursor-pointer"><mat-icon color="accent">done</mat-icon> Order</a>
+        </div>
+        <div *ngIf="user !== null" class="p-[6px]">
+          <button mat-button color="primary" class="cursor-pointer" (click)="onLogoutButtonClick()"><mat-icon color="accent">logout</mat-icon> Logout</button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
+
+
+<div class="mx-[10px] text-[12px] sm:flex">
+  <div class="flex items-center h-[48px] w-full sm:justify-around">
+    <button mat-raised-button color="accent" cdkOverlayOrigin #trigger="cdkOverlayOrigin" (click)="triggerClick$.next()">
+      <mat-icon class="color-primary">person</mat-icon><span class="color-primary">Youre account</span>
+    </button>
+    <a mat-stroked-button class="ml-[8px]" href="#">Currency</a>
+  </div>
+  <div class="h-[4px] rounded-[2px] mat-elevation-z3 bg-primary sm:hidden"></div>
+  <div class="flex items-center justify-between h-[48px] w-full sm:justify-around">
+    <p class="flex items-center">
+      <mat-icon color="accent">mail</mat-icon><span class="text-white">contact@nutristore.com</span>
+    </p>
+    <a mat-raised-button color="primary" routerLink="/cart" *rxLet="itemsCount$; let count">
+      <mat-icon color="accent">shopping_basket</mat-icon><span class="color-accent"> {{ count }} items</span>
+    </a>
+  </div>
+</div>
+<div class="h-[4px] rounded-[2px] mat-elevation-z3 bg-primary"></div>
+<div class="mt-[8px] flex flex-col items-center sm:flex-row w-full max-w-[720px] mx-auto">
+  <div class="w-[90%] max-w-[360px]">
+    <img class="drop-shadow-lg cursor-pointer" src="/assets/new-images/for_logo.png" alt="logo" routerLink="/">
+    <h1 id="subtitle" class="text-[30px] text-center font-bold text-gradient text-shadow font-roboto">NUTRISTORE.COM</h1>
+  </div>
+  <div class="w-[90%] flex flex-col max-w-[360px] items-center">
+    <div #autocompleteContainer cdkOverlayOrigin #autocompleteOrigin="cdkOverlayOrigin" class="w-[120%] scale-75 origin-top lg:origin-center">
+      <mat-form-field id="searchbox" color="accent" *changeDetectionView="let trigger" class="w-full" appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput type="text"
+              #input
+              [rxBindTwoWayInput]="searchKey$"
+              (input)="trigger();"
+              (focus)="trigger(); onInputFocus(input.value)"
+              (blur)="trigger();"
+              (change)="trigger()"
+              scrollOnClick="#searchbox"
+              addOffsetToScroll="-18">
+        <mat-icon matSuffix color="accent">search</mat-icon>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" class="text-[12px] category-btn translate-y-[-75%] w-[90%]" (click)="categoriesClick.emit()">
+      <mat-icon>menu</mat-icon> Categories
+    </button>
+  </div>
+</div>
+<div class="h-[4px] mat-elevation-z3 bg-primary translate-y-[-15px] sm:translate-y-[0] sm:mb-[12px]"></div>
+
+<ng-template cdkConnectedOverlay
+             [cdkConnectedOverlayOrigin]="autocompleteContainer"
+             [cdkConnectedOverlayOpen]="isSearchResultsNotEmpty$ | push"
+             [cdkConnectedOverlayOffsetY]="-18"
+             (overlayOutsideClick)="backdropClick$.next()"
+             (detach)="backdropClick$.next()"
+             rx-reposition-scroll-strategy>
+  <app-autocomplete @autocomplete
+                    [results$]="results$"
+                    [originContainer]="autocompleteContainer"
+                    (keySelected)="searchKey$.next('')"/>
+</ng-template>

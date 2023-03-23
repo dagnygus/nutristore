@@ -1,0 +1,20 @@
+h3, p {
+  margin: 18px 0;
+}
+
+p, a {
+  font-size: 12px;
+
+  @media (min-width: 640px) {
+    font-size: 16px;
+  }
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 600;
+
+  @media (min-width: 640px) {
+    font-size: 18px;
+  }
+}

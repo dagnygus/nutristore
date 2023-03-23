@@ -1,0 +1,7 @@
+<nav [toogleOverflow]="overflowTrigger$" class="block">
+  <ul class="block">
+    <li *rxFor="let item of results$; trackBy: 'id'; renderCallback: renderCb$" class="mx-[6px] hover:bg-slate-400 cursor-pointer shadow-inner">
+      <a class="color-accent px-[8px]  py-[12px] block" [routerLink]="['/product', item.id]">{{ item.name }}</a>
+    </li>
+  </ul>
+</nav>

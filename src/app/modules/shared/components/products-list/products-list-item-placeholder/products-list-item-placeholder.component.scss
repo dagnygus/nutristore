@@ -1,0 +1,28 @@
+@use 'src/material/material.scss' as mat;
+
+.indicator {
+  background-image: linear-gradient(to left ,transparent, rgba(mat.$accent-color, 0.5), rgba(mat.$accent-color, 0.5), transparent);
+  animation: 300ms cubic-bezier(0.33, 1, 0.68, 1) infinite alternate products-list-paceholder-indicator-animation;
+}
+
+.img-indicator {
+  transform: scale(0);
+  background-color: rgba(mat.$primary-color, 0.8);
+  animation: 600ms linear infinite  products-list-paceholder-img-indicator-animation;
+}
+
+@keyframes products-list-paceholder-indicator-animation {
+  from {
+    left: calc(0% - 50px)
+  }
+  to {
+    left: 100%
+  }
+}
+
+@keyframes products-list-paceholder-img-indicator-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,15 @@
+<div class="box-ratio before:pb-[100%] overflow-hidden">
+  <div class="img-indicator absolute top-0 left-0 w-full h-full origin-center rounded-[50%]"></div>
+  <div class="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+    <mat-spinner color="accent"/>
+  </div>
+</div>
+<div class="flex flex-col bg-blue-grey-600 text-center min-h-[120px] inverted-shadow">
+  <app-rating [rating]="0" class="mb-[4px]"></app-rating>
+  <div class="text-[12px] text-white mx-[4px]">******</div>
+  <div class="w-full p-[10px] text-white mt-auto inverted-shadow relative bg-primary">
+    <mat-icon class="opacity-0">add</mat-icon>
+    <mat-icon class="opacity-0">shopping_basket</mat-icon>
+    <div class="absolute w-[50px] h-full indicator top-0"></div>
+  </div>
+</div>

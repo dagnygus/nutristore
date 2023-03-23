@@ -1,0 +1,29 @@
+h1, h2 {
+  text-align: center;
+  margin: 28px 0;
+}
+
+p {
+  font-size: 12px;
+  margin: 12px 0;
+
+  @media (min-width: 640px) {
+    font-size: 16px;
+  }
+}
+
+h1 {
+  font-size: 32px;
+
+  @media (min-width: 640px) {
+    font-size:  36px;
+  }
+}
+
+h2 {
+  font-size: 24px;
+
+  @media (min-width: 640px) {
+    font-size: 28px;
+  }
+}

@@ -1,0 +1,58 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="w-[97%] mx-auto grid max-w-[460px]">
+  <p class="text-center text-[12px] text-white mb-[32px]">Comlete the form to register account. If you already have accound, <a routerLink="/forms/login" class="color-accent">sign in</a> now</p>
+
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>First Name</mat-label>
+    <input name="firstName" formControlName="firstName" type="text" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.firstName.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Last Name</mat-label>
+    <input name="lastName" formControlName="lastName" type="text" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.lastName.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Address E-Mail</mat-label>
+    <input name="email" formControlName="email" type="text" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.email.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>City</mat-label>
+    <input name="city" formControlName="city" type="text" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.city.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Street</mat-label>
+    <input name="street" formControlName="street" type="text" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.street.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>State</mat-label>
+    <input name="state" formControlName="state" type="text" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.state.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Country</mat-label>
+    <input name="country" formControlName="country" type="text" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.country.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Zip Code</mat-label>
+    <input name="zipCode" formControlName="zipCode" type="text" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.zipCode.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Password</mat-label>
+    <input name="password" formControlName="password" type="password" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.password.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Confirm password</mat-label>
+    <input name="confirmPassword" formControlName="confirmPassword" type="password" matInput>
+    <mat-error *appFirstKeyOf="formGroup.controls.confirmPassword.errors; let error">{{ error }}</mat-error>
+  </mat-form-field>
+  <div class="grid grid-cols-2 gap-[4px] text-[12px]">
+    <button mat-raised-button color="primary" [disabled]="submitDisabled$ | push">Register</button>
+    <a mat-raised-button color="warn" [routerLink]="prevUrl$ | push"  [queryParams]="prevQuery$ | push" [fragment]="prevFragment$ | push">Cancel</a>
+  </div>
+</form>

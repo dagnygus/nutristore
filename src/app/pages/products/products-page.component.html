@@ -1,0 +1,4 @@
+<app-products-list [products$]="products$"
+                   [productsStatus$]="productsStatus$"
+                   (productSelected)="onProductSelected($event)"
+                   (addProduct)="onAddProduct($event)"/>

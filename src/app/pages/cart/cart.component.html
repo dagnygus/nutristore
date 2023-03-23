@@ -1,0 +1,29 @@
+<div class="page" *ngIf="cartHasItems$ | push else noItemsTemplate" @cartContent>
+  <app-cart-list [cartList$]="cartList$"
+                 (increase)="onIncrease($event)"
+                 (decrease)="onDecrease($event)"
+                 (remove)="onRemove($event)"
+                 class="mx-auto w-full max-w-[660px]"></app-cart-list>
+  <div *rxLet="totalPrice$; let totalPrice"
+       class="grid grid-cols-3 min-[560px]:grid-cols-[2fr_1fr_1fr] gap-[4px] rounded-[4px] text-white
+              bg-blue-grey-600 mat-elevation-z3 text-[12px] p-[12px_6px] w-[calc(100%_-_32px)] max-w-[628px] mx-auto my-[16px]">
+    <div class="flex justify-center items-center">
+      <p class="text-center min-[440px]:text-[16px]">
+        Total Price: {{ totalPrice }}
+      </p>
+    </div>
+    <button mat-raised-button color="warn" (click)="onClearButtonClick()" class="text-center">Clear cart</button>
+    <button mat-raised-button color="accent" class="text-center" routerLink="/checkout" guardedLink>Make order</button>
+  </div>
+</div>class="page"
+
+<ng-template #noItemsTemplate>
+  <div class="page grid grid-rows-[1fr_auto_1fr] h-[80vh] bg-transparent-blue-grey backdrop-blur-sm" @cartContent>
+    <div class="justify-self-center self-end mb-[30px]">
+      <mat-icon color="accent" class="scale-[2.5]">sentiment_dissatisfied</mat-icon>
+    </div>
+    <div>
+      <p class="w-full text-center px-[16px]">You did not selected any product. Select category and add product to Your cart.</p>
+    </div>
+  </div>
+</ng-template>
