@@ -1,4 +1,8 @@
-@use './material.scss' as mat;
+@use './colors.scss' as mat;
+
+@debug mat.$primary-color;
+@debug mat.$accent-color;
+@debug mat.$warn-color;
 
 .color-primary {
   color: mat.$primary-color;

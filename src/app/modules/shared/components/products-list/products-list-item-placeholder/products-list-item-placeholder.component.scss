@@ -1,4 +1,4 @@
-@use 'src/material/material.scss' as mat;
+@use 'src/material/colors.scss' as mat;
 
 .indicator {
   background-image: linear-gradient(to left ,transparent, rgba(mat.$accent-color, 0.5), rgba(mat.$accent-color, 0.5), transparent);

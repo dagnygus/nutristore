@@ -1,4 +1,4 @@
-@use 'src/material/material.scss' as mat;
+@use 'src/material/colors.scss' as mat;
 
 :host {
   align-self: start;
@@ -28,13 +28,3 @@ img {
   height: auto;
   margin-right: 8px;
 }
-
-// @media (min-width: 1024px) {
-//   li {
-//     border-bottom: 1px solid mat.$accent-color;
-//   }
-
-//   li:last-of-type {
-//     border-bottom: none;
-//   }
-// }
