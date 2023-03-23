@@ -1,12 +1,11 @@
 import { AppState } from 'src/app/state/app.state';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 import { animate, group, query, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { asyncScheduler, filter, map, merge, skip, Subject, subscribeOn, Observable } from 'rxjs';
 import { DetachView } from './modules/shared/directives/detach-view.directive';
 import { RouterOutletContainer } from './modules/shared/directives/router-outled-container.directive';
-import { BehaviorDistributor } from './utils/distributors';
 import { BreakpointObserver } from '@angular/cdk/layout'
 import { select, Store } from '@ngrx/store';
 
@@ -65,29 +64,33 @@ const mainContentAnimationMetadata = trigger('mainContent', [
   ],
 })
 export class AppComponent {
-  readonly sidenavOpen$: Subject<boolean>;
+  readonly sidenavOpen$: Observable<boolean>;
   readonly fullPath$: Observable<string | null>;
+  readonly openSidenav$ = new Subject<void>();
+  readonly closeSidenav$ = new Subject<void>();
 
   constructor(router: Router,
               breakpointObserver: BreakpointObserver,
               store: Store<AppState>) {
-    const innerSource$ = merge(
+    this.sidenavOpen$ = merge(
       router.events.pipe(
         filter((e) => e instanceof NavigationStart),
         map(() => false),
-        subscribeOn(asyncScheduler)
+        subscribeOn(asyncScheduler),
+        tap(console.log)
       ),
       breakpointObserver.observe('(min-width:1024px)').pipe(
         skip(1),
         map((state) => !state.matches),
         filter((value) => !value)
-      )
+      ),
+      this.openSidenav$.pipe(map(() => true)),
+      this.closeSidenav$.pipe(map(() => false)),
     ).pipe(distinctUntilChanged());
 
     this.fullPath$ = store.pipe(
       select(({ router }) => router?.state.fullPath ?? null),
     );
-    this.sidenavOpen$ = new BehaviorDistributor(false, innerSource$);
   }
 
   title = 'nutristore';

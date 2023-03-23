@@ -1,8 +1,8 @@
 <div class="nuts-background" [@mainContent]="sidenavOpen$ | push"></div>
-<header nutristore (categoriesClick)="sidenavOpen$.next(true)" [@mainContent]="sidenavOpen$ | push"></header>
-<div @backdrop *ngIf="sidenavOpen$ | push" class="sidenav-backdrop" (click)="sidenavOpen$.next(false)"></div>
+<header nutristore (categoriesClick)="openSidenav$.next()" [@mainContent]="sidenavOpen$ | push"></header>
+<div @backdrop *ngIf="sidenavOpen$ | push" class="sidenav-backdrop" (click)="closeSidenav$.next()"></div>
 <div class="grid lg:grid-cols-[auto_1fr] w-full max-w-[1200px] mx-auto">
-  <app-sidebar [@sidenav]="sidenavOpen$ | push" (closeClick)="sidenavOpen$.next(false)"></app-sidebar>
+  <app-sidebar [@sidenav]="sidenavOpen$ | push" (closeClick)="openSidenav$.next()"></app-sidebar>
   <main [@mainContent]="sidenavOpen$ | push" [@outletContainer]="fullPath$ | push" class="grid items-start">
     <router-outlet></router-outlet>
   </main>
