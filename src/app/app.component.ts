@@ -3,7 +3,7 @@ import { distinctUntilChanged, tap } from 'rxjs/operators';
 import { animate, group, query, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { asyncScheduler, filter, map, merge, skip, Subject, subscribeOn, Observable } from 'rxjs';
+import { asyncScheduler, filter, map, merge, skip, Subject, subscribeOn, Observable, startWith } from 'rxjs';
 import { DetachView } from './modules/shared/directives/detach-view.directive';
 import { RouterOutletContainer } from './modules/shared/directives/router-outled-container.directive';
 import { BreakpointObserver } from '@angular/cdk/layout'
@@ -86,7 +86,7 @@ export class AppComponent {
       ),
       this.openSidenav$.pipe(map(() => true)),
       this.closeSidenav$.pipe(map(() => false)),
-    ).pipe(distinctUntilChanged());
+    ).pipe(startWith(false), distinctUntilChanged());
 
     this.fullPath$ = store.pipe(
       select(({ router }) => router?.state.fullPath ?? null),
